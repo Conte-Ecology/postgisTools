@@ -24,9 +24,9 @@ raster processing in this section. A script is written to perform these updates
 on the database specified. The script should only be run once on a database.
 The script will do the following:
 
-1) Fix overlapping polygons in the `catchments` table
-2) Add a geometry column for the polygon centroids to the `catchments` table
-3) Create a new `rasters` schema for the raster tables and add it to the search 
+1. Fix overlapping polygons in the `catchments` table
+2. Add a geometry column for the polygon centroids to the `catchments` table
+3. Create a new `rasters` schema for the raster tables and add it to the search 
 path
 
 ### Execution
