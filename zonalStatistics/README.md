@@ -95,7 +95,7 @@ raster in that zone. The mean value units match that of the raster layer. Table
 1 shows an example output table.
 
 | featureid | num_pixels | mean  |
-| :-------: | ---------: | :---: |
+| :-------: | :--------: | :---: |
 | 20625492  |    3       | 5.663 |
 | 20625493  |    2       | 5.660 |
 | 20625494  |    6       | 5.380 |
