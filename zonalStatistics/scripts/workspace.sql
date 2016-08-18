@@ -4,21 +4,48 @@ FROM catchments
 WHERE featureid in (201480095, 201480170, 201480094, 201481180, 201480985, 201480965, 201480850);
 
 
-ALTER TABLE gis.catchments
-  ADD COLUMN centroids geometry(Geometry, 4326); 
-  
+
+
+
+
+-- Self-intersection issue
+
+
+SELECT * INTO gis.cats
+FROM catchments
+WHERE featureid in (2021034683, 2021035323, 2021034779, 2021034780, 2021035324);
+
+select ST_IsValid(geom)
+from catchments;
+
 UPDATE gis.catchments 
-  SET centroids = ST_Centroid(geom);
+  SET geom = ST_MakeValid(geom);
 
-CREATE INDEX catchments_centroids_gist ON gis.catchments USING gist(centroids); 
+select ST_IsValid(geom)
+from cats;
+  
+  
+$ pgsql2shp -f qds_cnt -h localhost -u postgres -P password gisdb "SELECT sp_count, geom FROM grid50_rsa WHERE province = 'Gauteng'"
+  
+  
+
+time /home/kyle/scripts/db/gis/covariate_rasters/import_covariate_rasters.sh sheds_new /home/kyle/data/gis/covariates/rasters/outputFiles/elevation
+
+time /home/kyle/scripts/postgis_tools/zonal_statistics.sh sheds_new catchments elevation
+
+/home/kyle/scripts/postgis_tools/zonal_statistics.sh sheds_new cats elevation
+
+psql -d sheds -c"COPY raster_types TO STDOUT WITH CSV HEADER" > /home/kyle/postgisTools/zonalStatistics/tables/stats_forest.csv
 
 
 
-/home/kyle/scripts/db/gis/covariate_rasters/import_covariate_rasters.sh sheds_new dep_so4_2011 /home/kyle/data/gis/covariates/rasters
 
-/home/kyle/scripts/postgis_tools/zonal_statistics.sh sheds_new catchments dep_so4_2011
+SELECT *
+FROM st_gdaldrivers()
+ORDER BY short_name;
+psql -d sheds -c"COPY raster_types TO STDOUT WITH CSV HEADER" > /home/kyle/workspace/raster_types.csv
 
-psql -d sheds_new -c"COPY stats_dep_so4_2011 TO STDOUT WITH CSV HEADER" > /home/kyle/postgisTools/zonalStatistics/tables/stats_dep_so4_2011.csv
+
 
 
 

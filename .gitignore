@@ -1,4 +1,9 @@
 # Directories
 # -----------
+
+
 zonalStatistics/tables/
 zonalStatistics/spatial/
+literature/
+
+queryDaymet/data
