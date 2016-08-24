@@ -143,10 +143,33 @@ allowable raster types for upload are listed in Table 2.
 |	XYZ	|	ASCII Gridded XYZ	|
 |	ZMap	|	ZMap Plus Grid	|
 Table 2: Allowable raster types
-
 <br><br>
 
-## Comparison Metrics
+
+# Comparison Metrics
+The comparison metrics table provides a comparison of the Postgres method for 
+calculating zonal statistics to the baseline of the ArcGIS method, which 
+resamples rasters prior to running the zonal statistics tool. Four sample 
+rasters are shown to compare how the method varies over data types and 
+spatial resolution. The root-mean-square error is calculated for all of the 
+records with the ArcGIS values being considered the baseline. RMSEs are also 
+calculated separately for the two methods used in the Postgres scripts, with 
+"point" referring to the centroid method and "areal"" refering to the spatial 
+average. The catchment loss count refers to the number of catchments with NA 
+values in the Postgres method that have values with the ArcGIS method. The 
+final columns show the range of raster values for each of the methods for 
+reference. In general, the Postgres method seems to be acceptable in its 
+difference from the ArcGIS method. The method does show an increasing loss of 
+catchments as raster resolution increases, but this could be solved by 
+resampling rasters prior to upload.
+
+| Layer Name   | Spatial Resolution | RMSE  | Point RMSE | Areal RMSE | Catchment Loss Count | Arc Min Value | Arc Max Value | PSQL Min Value | PSQL Max Value |
+| :--------:   | :----------------: | ----  | ---------- | ---------- | -------------------- | ------------- | ------------- | -------------- | -------------- |
+| forest       | 30 x 30 meters     | 0.019 | 0.265      | 0.018      | 0                    | 0.000         | 1.000         | 0.000          | 1.000          |
+| elevation    | 30 x 30 meters     | 0.221 | 0.557      | 0.220      | 0                    | -0.167        | 1512.304      | -0.186         | 1512.278       |
+| ann_tmin_c   | 800 x 8000 meters  | 0.077 | 0.071      | 0.078      | 168                  | -4.197        | 13.208        | -4.465         | 13.260         |
+| dep_so4_2011 | ~ 2.3 x 2.3 km     | 0.141 | 0.146      | 0.123      | 2692                 | 4.958         | 24.982        | 4.952          | 25.037         |
+Table 3: Metrics comparing the Postgres method to the baseline of the ArcGIS method.
 <br><br>
 
 

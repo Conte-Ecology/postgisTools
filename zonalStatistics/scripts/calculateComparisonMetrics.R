@@ -64,27 +64,31 @@ for (j in seq_along(layerNames)){
   metrics$Layer_Name[j] <- layerNames[j]
   
   # Min/max values
-  metrics$Arc_Min_Value[j]  <- min(allStats$arc,  na.rm = T)
-  metrics$Arc_Max_Value[j]  <- max(allStats$arc,  na.rm = T)
-  metrics$PSQL_Min_Value[j] <- min(allStats$psql, na.rm = T)
-  metrics$PSQL_Max_Value[j] <- max(allStats$psql, na.rm = T)
+  metrics$Arc_Min_Value[j]  <- round(min(allStats$arc,  na.rm = T), digits = 3)
+  metrics$Arc_Max_Value[j]  <- round(max(allStats$arc,  na.rm = T), digits = 3)
+  metrics$PSQL_Min_Value[j] <- round(min(allStats$psql, na.rm = T), digits = 3)
+  metrics$PSQL_Max_Value[j] <- round(max(allStats$psql, na.rm = T), digits = 3)
   
   # RMSE 
-  metrics$RMSE[j] <- sqrt( mean( (allStats$arc-allStats$psql)^2 , na.rm = TRUE ) )
+  metrics$RMSE[j] <- round(sqrt(mean((allStats$arc-allStats$psql)^2 , 
+                                     na.rm = TRUE ) ), 
+                           digits = 3)
   
   # Extra catchments missing PSQL
   metrics$Catchment_Loss_Count[j] <- length(missingPSQL) - length(both)
  
-  # RMSE 
-  metrics$Point_RMSE[j] <- sqrt( mean( (point$arc-point$psql)^2 , na.rm = TRUE ) )
-  metrics$Areal_RMSE[j] <- sqrt( mean( (areal$arc-areal$psql)^2 , na.rm = TRUE ) )
+  # Point RMSE 
+  metrics$Point_RMSE[j] <- round(sqrt(mean((point$arc-point$psql)^2 , 
+                                            na.rm = TRUE ) ), 
+                                 digits = 3)
+  
+  # Areal RMSE 
+  metrics$Areal_RMSE[j] <- round(sqrt(mean((areal$arc-areal$psql)^2 , 
+                                           na.rm = TRUE ) ), 
+                                 digits = 3)
 
   # Remove variables
   rm(arcStats)
 }
 
-
-
-
-
-
+print(metrics)

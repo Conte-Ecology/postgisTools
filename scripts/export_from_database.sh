@@ -3,7 +3,7 @@
  
 # Table
 # ----- 
-psql -d sheds_new -c"COPY stats_ann_tmin_c TO STDOUT WITH CSV HEADER" > /home/kyle/postgisTools/zonalStatistics/tables/stats_ann_tmin_c.csv
+psql -d sheds_new -c"COPY stats_elevation TO STDOUT WITH CSV HEADER" > /home/kyle/postgis_tools/zonal_statistics/tables/stats_elevation.csv
 
 
 # Raster

@@ -1,4 +1,12 @@
 
+./query_daymet.sh sheds_new /home/kyle/postgis_tools/query_daymet/input/AGB_Sites.csv /home/kyle/workspace/testRecord.csv '2010-01-01' '2010-01-31'
+
+
+
+
+
+
+
 SELECT * INTO gis.cats
 FROM catchments
 WHERE featureid in (201480095, 201480170, 201480094, 201481180, 201480985, 201480965, 201480850);
