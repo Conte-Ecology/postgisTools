@@ -2,10 +2,12 @@
 ./query_daymet.sh sheds_new /home/kyle/postgis_tools/query_daymet/input/AGB_Sites.csv /home/kyle/workspace/testRecord.csv '2010-01-01' '2010-01-31'
 
 
+./query_daymet.sh sheds_new /home/kyle/postgis_tools/query_daymet/input/test.csv /home/kyle/postgis_tools/query_daymet/output/testout.csv '1982-01-01' '1993-12-31'
+
+./query_daymet.sh sheds_new /home/kyle/postgis_tools/query_daymet/input/AGBSites.csv /home/kyle/postgis_tools/query_daymet/output/DaymetAGBSites.csv 1982-01-01 1993-12-31
 
 
-
-
+git rm --cached queryDaymet/data/AGBSites.csv
 
 SELECT * INTO gis.cats
 FROM catchments
