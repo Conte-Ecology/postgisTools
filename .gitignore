@@ -1,9 +1,13 @@
 # Directories
 # -----------
 
+# Main Directories
+literature/
+pointDelineation/
+pointsToCatchments/
 
+#Sub-directories
 zonalStatistics/tables/
 zonalStatistics/spatial/
-literature/
 
 queryDaymet/data/

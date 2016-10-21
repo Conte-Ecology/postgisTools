@@ -10,7 +10,7 @@ layers from the [NHDHRDV2](http://conte-ecology.github.io/shedsGisData/) are
 utilized. The process is an adaptation of the existing work in the
 [basinCharacteristics](https://github.com/Conte-Ecology/shedsGisData/tree/master/basinCharacteristics) 
 repo which refers to the same process performed in ArcGIS. The Comparison 
-Metrics attempts to quantify the differences between the two methods.
+Metrics section attempts to quantify the differences between the two methods. 
 <br><br>
 
 
